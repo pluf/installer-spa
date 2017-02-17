@@ -1,0 +1,167 @@
+<div
+	layout="column"
+	layout-margin
+	flex>
+	
+	<!-- 	Domain configuration -->
+	<section	
+		md-whiteframe="6">
+		<md-toolbar>
+			<h3>Domain</h3>
+			<p>Config properties of domain. 
+			<br/><a href="https://github.com/pluf/installer-spa/wiki">Read more</a></p>
+		</md-toolbar>
+		<div layout-padding>
+			<md-input-container class="md-block" flex-gt-sm required>
+				<label>Main domain</label> 
+				<input ng-model="config.domain"> 
+			</md-input-container>
+		</div>
+	</section>	
+
+	<!-- 	Admin configuration -->
+	<section
+		md-whiteframe="6">
+		<md-toolbar>
+			<h3>Administrator</h3>
+			<p>Config properties of administrator. 
+			<br/><a href="https://github.com/pluf/installer-spa/wiki">Read more</a></p>
+		</md-toolbar>
+		<div layout-padding>
+			<md-input-container class="md-block" flex-gt-sm required>
+				<label>Email</label> 
+				<input ng-model="config.adminEmail"> 
+			</md-input-container>
+		</div>
+	</section>	
+	
+	<!-- 	Multi tenancy configuration -->
+	<section	
+		md-whiteframe="6">
+		<md-toolbar>
+			<h3>Multi tenancy</h3>
+			<p>Config properties of tenants. 
+			<br/><a href="https://github.com/pluf/installer-spa/wiki">Read more</a></p>
+		</md-toolbar>
+		<div layout-padding>
+			<md-switch 
+				ng-model="config.multitenant" 
+				aria-label="multitenant" 
+				ng-true-value="1" 
+				ng-false-value="0" 
+				class="md-warn">
+    			Enable multi-tenancy
+			</md-switch>
+		</div>
+	</section>	
+	
+	<!-- 	Debug config -->
+	<section	
+		md-whiteframe="6">
+		<md-toolbar>
+			<h3>Debug mode</h3>
+			<p>Config properties of debuging. 
+			<br/><a href="https://github.com/pluf/installer-spa/wiki">Read more</a></p>
+		</md-toolbar>
+		<div layout-padding>
+			<md-switch 
+				ng-model="config.debug" 
+				aria-label="multitenant" 
+				ng-true-value="1" 
+				ng-false-value="0" 
+				class="md-warn">
+    				Enable debug mode
+			</md-switch>
+		</div>
+	</section>	
+	
+	<!-- 	DBMS config -->
+	<section	
+		ng-controller="InstallDbmsCtrl"
+		md-whiteframe="6">
+		<md-toolbar>
+			<h3>DBMS</h3>
+			<p>Config properties of DBMS. 
+			<br/><a href="https://github.com/pluf/installer-spa/wiki">Read more</a></p>
+		</md-toolbar>
+		<div layout-padding>
+		
+			<md-input-container>
+				<label>Data base engine</label>
+				<md-select ng-model="config.db_engine">
+					<md-option 
+				    	ng-repeat="engine in dbEngines" 
+				    	ng-value="engine.id">
+			      		{{engine.title}}
+			  		</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm required>
+				<label>Server</label> 
+				<input ng-model="config.db_server"> 
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm required>
+				<label>Login</label> 
+				<input ng-model="config.db_login"> 
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Password</label> 
+				<input ng-model="config.db_password"> 
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm required>
+				<label>Data base</label> 
+				<input ng-model="config.db_database"> 
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Data base</label> 
+				<input ng-model="config.db_table_prefixt"> 
+			</md-input-container>
+		</div>
+	</section>
+	
+	<!-- 	Modeuls -->
+	<section	
+		ng-controller="InstallPackageCtrl"
+		md-whiteframe="6">
+		<md-toolbar>
+			<h3>Server modules</h3>
+			<p>Config properties of server modules. 
+			<br/><a href="https://github.com/pluf/installer-spa/wiki">Read more</a></p>
+		</md-toolbar>
+		<div layout-padding>
+			<md-contact-chips
+				ng-model="config.modules"
+				md-contacts="moduleSearch($query)"
+				md-contact-name="title"
+				md-contact-image="image"
+				md-contact-email="description"
+				md-require-match="true"
+				md-highlight-flags="i"
+				filter-selected="true"
+				placeholder="Modules">
+			</md-contact-chips>
+		</div>
+		
+		<md-list class="fixedRows">
+			<md-subheader class="md-no-sticky">Modules</md-subheader>
+			<md-list-item 
+				class="md-2-line contact-item"
+				ng-repeat="(index, module) in modules"
+		    	ng-if="config.modules.indexOf(module) < 0">
+		    	<img ng-src="{{module.image}}" class="md-avatar" alt="{{module.id}}" />
+				<div class="md-list-item-text compact">
+				  <h3>{{module.title}}</h3>
+				  <p>{{module.description}}</p>
+				</div>
+			</md-list-item>
+		</md-list>
+	</section>	
+	
+	<div>
+		<md-button
+			ng-click="install()">
+			<md-icon>install</md-icon>
+			Install
+		</md-button>
+	</div>
+</div>
