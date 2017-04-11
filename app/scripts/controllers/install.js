@@ -129,6 +129,10 @@ angular.module('installerSpaApp')
 	    id : 'Backup',
 	    title : 'Backup',
 	    description : 'A module to enable backup system.'
+	} , {
+	    id : 'Collection',
+	    title : 'Collection',
+	    description : 'A module to manage collections and their documents.'
 	} ];
 
 	contacts.forEach(function (m) {
