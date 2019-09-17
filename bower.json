@@ -1,6 +1,6 @@
 {
   "name": "installer-spa",
-  "version": "5.11.5",
+  "version": "5.11.6",
   "dependencies": {
     "angular": "^1.4.0",
     "angular-animate": "^1.4.0",
